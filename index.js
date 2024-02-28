@@ -12,11 +12,6 @@ client.on('qr', (qr) => {
 
 client.on('ready', () => {
     console.log('Client is ready!');
-    
-    console.log('Bot is activated!');
-    
-    const yourPhoneNumber = '08882037076';
-    client.sendMessage(yourPhoneNumber, 'Bot telah diaktifkan!');
 });
 
 client.on('message', async (message) => {
