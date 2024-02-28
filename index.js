@@ -22,7 +22,7 @@ client.on('message', async (message) => {
 
 // Informasi Kumpul atau Pertemuan 
 client.on('message', async (message) => {
-    const [action, tanggal, waktu, tempat, pakaian, note] = message.body.split(';');
+    const [action, tanggal, waktu, tempat, pakaian, note, kegiatan] = message.body.split(';');
 	if (action.trim() =='!info') {
 
         const currentHour = new Date().getHours();
@@ -53,13 +53,7 @@ Demikian pengumuman ini saya sampaikan saya harap seluruh anggota dapat hadir pa
 
 Created by ${await (await message.getContact()).getFormattedNumber()}`);
 	}
-});
-
-//Pengingat Kumpul
-client.on('message', async (message) => {
-    const [action, tanggal, waktu, tempat, pakaian, note] = message.body.split(';');
-	if (action.trim() =='!warning') {
-
+    else if (action.trim() =='!warning') {
         const currentHour = new Date().getHours();
         
         // Menentukan salam berdasarkan waktu
@@ -72,7 +66,7 @@ client.on('message', async (message) => {
             greeting = 'Selamat sore';
         }
 
-		await message.reply(`🔊🔊
+        await message.reply(`🔊🔊
 Assalamualaikum warahmatullahi wabarakatuh,
 ${greeting}, Salam Pramuka! 
 Mengingatkan kembali kepada seluruh anggota Dewan Kerja Ranting Padalarang diwajibkan hadir pada:
@@ -87,13 +81,8 @@ Mengingatkan kembali kepada seluruh anggota Dewan Kerja Ranting Padalarang diwaj
 Demikian pengumuman ini saya sampaikan saya harap seluruh anggota dapat hadir pada kegiatan tersebut di atas, sesuai dengan waktu yang telah di tentukan, Terimakasih.
 
 Created by ${await (await message.getContact()).getFormattedNumber()}`);
-	}
-});
-
-//List
-client.on('message', async (message) => {
-    const [action, kegiatan] = message.body.split(';');
-    if (action.trim() =='!list') {
+    }
+    else if (action.trim() =='!list') {
         await message.reply(`List kehadiran kegiatan ${kegiatan} :
 1.
 2.
@@ -113,6 +102,4 @@ dst.
 created by ${await (await message.getContact()).getFormattedNumber()}`);
     }
 });
- 
-
 client.initialize();
